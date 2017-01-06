@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.shareManager" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>ShareManager</name>
+    <js-module name="ShareManager" src="www/ShareManager.js">
+        <clobbers target="ShareManager" />
+    </js-module>
+    
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="ShareManager">
+                <param name="ios-package" value="ShareManager" />
+            </feature>
+            
+            <preference name="WECHATAPPID" value="wx597edabdb876c917"/>
+            <preference name="QQ_APP_ID" value="1105821732" />
+            <preference name="WEIBO_APP_ID" value="607463238"/>
+        </config-file>
+        
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+            <array>
+                <!--微信-->
+                <dict>
+                    <key>CFBundleURLName</key>
+                    <string>weixin</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>wx597edabdb876c917</string>
+                    </array>
+                </dict>
+                
+                <!--QQ-->
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>Editor</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>QQ41DBA091</string>
+                    </array>
+                </dict>
+                
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>Editor</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>1105821732</string>
+                    </array>
+                </dict>
+                <!--微博-->
+                <dict>
+                    <key>CFBundleTypeRole</key>
+                    <string>Editor</string>
+                    <key>CFBundleURLName</key>
+                    <string>$PACKAGE_NAME</string>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>wb607463238</string>
+                    </array>
+                </dict>
+                
+            </array>
+        </config-file>
+        
+        
+        <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+            <array>
+                <string>wechat</string>
+                <string>weixin</string>
+                <string>sinaweibohd</string>
+                <string>sinaweibo</string>
+                <string>sinaweibosso</string>
+                <string>weibosdk</string>
+                <string>weibosdk2.5</string>
+                <string>mqqapi</string>
+                <string>mqq</string>
+                <string>mqqOpensdkSSoLogin</string>
+                <string>mqqconnect</string>
+                <string>mqqopensdkdataline</string>
+                <string>mqqopensdkgrouptribeshare</string>
+                <string>mqqopensdkfriend</string>
+                <string>mqqopensdkapi</string>
+                <string>mqqopensdkapiV2</string>
+                <string>mqqopensdkapiV3</string>
+                <string>mqzoneopensdk</string>
+                <string>wtloginmqq</string>
+                <string>wtloginmqq2</string>
+                <string>mqqwpa</string>
+                <string>mqzone</string>
+                <string>mqzonev2</string>
+                <string>mqzoneshare</string>
+                <string>wtloginqzone</string>
+                <string>mqzonewx</string>
+                <string>mqzoneopensdkapiV2</string>
+                <string>mqzoneopensdkapi19</string>
+                <string>mqzoneopensdkapi</string>
+                <string>mqqbrowser</string>
+                <string>mttbrowser</string>
+                <string>alipay</string>
+                <!--微博的数据-->
+            </array>
+            
+        </config-file>
+        
+        <config-file target="*-Info.plist" parent="NSAppTransportSecurity">
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true/>
+            </dict>
+        </config-file>
+        
+        
+        <!-- 微信的依赖 -->
+        <header-file src="src/ios/libs/OpenSDK1.7.4/WXApi.h" />
+        <header-file src="src/ios/libs/OpenSDK1.7.4/WXApiObject.h" />
+        <source-file src="src/ios/libs/OpenSDK1.7.4/libWeChatSDK.a" framework="true" />
+        
+        
+        <!--QQ 的依赖-->
+        <source-file src="src/ios/TencentOpenAPI.framework" custom="true" framework="true"/>
+        <source-file src="src/ios/TencentOpenApi_IOS_Bundle.bundle" />
+        <!--微博的依赖-->
+        <header-file src="src/ios/libWeiboSDK/WBHttpRequest.h" />
+        <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboShare.h" />
+        <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboToken.h" />
+        <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboUser.h" />
+        <header-file src="src/ios/libWeiboSDK/WBHttpRequest+WeiboGame.h" />
+        <header-file src="src/ios/libWeiboSDK/WBSDKBasicButton.h" />
+        <header-file src="src/ios/libWeiboSDK/WBSDKCommentButton.h" />
+        <header-file src="src/ios/libWeiboSDK/WBSDKRelationshipButton.h" />
+        <header-file src="src/ios/libWeiboSDK/WeiboSDK.h" />
+        <header-file src="src/ios/libWeiboSDK/WeiboSDK+Statistics.h" />
+        <header-file src="src/ios/libWeiboSDK/WeiboUser.h" />
+        <source-file src="src/ios/libWeiboSDK/libWeiboSDK.a" framework="true"  compiler-flags="-objc"/>
+        <resource-file src="src/ios/libWeiboSDK/WeiboSDK.bundle" />
+        
+
+        <!-- Other required frameworks -->
+        <framework src="libz.tbd" />
+        <framework src="libsqlite3.0.tbd" />
+        <framework src="CoreTelephony.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="Security.framework" />
+        <framework src="CFNetwork.framework" />
+        <framework src="libstdc++.6.0.9tbd" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="libiconv.tbd" />
+        <framework src="libstdc++.tbd" />
+        <framework src="QuartzCore.framework" />
+        <framework src="ImageIO.framework" />
+        <framework src="CoreText.framework" />
+        <framework src="Foundation.framework" />
+        
+        
+        <header-file src="src/ios/BDSquareMoreView.h" />
+        <source-file src="src/ios/BDSquareMoreView.m" />
+        <header-file src="src/ios/ShareManager.h" />
+        <source-file src="src/ios/ShareManager.m" />
+    </platform>
+    
+    
+    
+    
+    
+    
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            
+            <feature name="ShareManager">
+                <param name="android-package" value="com.shareManager.ShareManager" />
+            </feature>
+        </config-file><config-file parent="/*" target="AndroidManifest.xml">
+        </config-file>
+        <source-file src="src/android/ShareManager.java" target-dir="src/com/shareManager/ShareManager" />
+    </platform>
+</plugin>
